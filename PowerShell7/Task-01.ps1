@@ -17,6 +17,6 @@ $dpa = 'dpa-01.vcorp.local'
 new-authobject -Server $dpa
 
 #CREATE THE CYBER THREAT ANALiSYS POLICY
-$policy = new-policy -Path '.\Task-01-AnalysisPolicyTemplate.xml'
+$policy = new-policy -Path 'Task-01-AnalysisPolicyTemplate.xml'
 
 $policy.aePolicy | Format-List
