@@ -54,38 +54,12 @@ function get-alerts {
         [Parameter( Mandatory=$true)]
         [int]$Page,
         [Parameter( Mandatory=$true)]
-        [string]$Policy
+        [string]$Filter
+
     )
     begin {}
     process {
         $Results = @()
-
-        $Filter = @"
-        <alertsFilter sortBy="policy" sortOrder="Ascending">
-        <name>Cyber Threat Filter</name>
-        <userId>46c9a9d5-a645-4dcb-b288-3d30ff930ad7</userId>
-        <type>Advanced</type>
-        <rootFilterEntity type="CompoundCondition"><leftSide type="CompoundCondition">
-            <leftSide type="ScalarCondition">
-            <field>policy</field>
-            <operand>IS</operand>
-            <value>$($Policy)</value>
-            </leftSide>
-            <logicalOperator>AND</logicalOperator>
-            <rightSide type="ScalarCondition">
-            <field>state</field>
-            <operand>IS</operand>
-            <value>New</value>
-            </rightSide>
-            </leftSide><logicalOperator>AND</logicalOperator>
-            <rightSide type="ScalarCondition">
-            <field>severity</field>
-            <operand>IS</operand>
-            <value>Error</value>
-            </rightSide>
-            </rootFilterEntity>
-        </alertsFilter>
-"@
 
         # OMIT /MC_RETIRED AND /MC_SYSTEM DOMAINS
         $Query = Invoke-RestMethod `
@@ -148,6 +122,6 @@ function new-policy {
     -Body $Policy `
     -SkipCertificateCheck
     return $Action
-   }
+   } # END PROCESS
    
-}
+} # END FUNCTION
