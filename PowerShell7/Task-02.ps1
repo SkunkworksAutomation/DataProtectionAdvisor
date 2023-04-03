@@ -21,7 +21,8 @@ $policy = 'Cyber Threat Anomaly Detection'
 $report = @()
 $file = 'alerts.csv'
 
-# GENERAL FILTER ALL ALERTS        
+
+# GENERAL FILTER ALL ALERTS     
 $filter = @"
        <alertsFilter sortBy="lastUpdated" sortOrder="Descending">
         <type>Advanced</type>
@@ -70,50 +71,52 @@ new-authobject -Server $dpa
 # GATHER THE ALERTS
 $alerts = get-alerts -Page $page -PageSize $pagesize -Filter $filter
 
-# BUILD THE RESULTS
-$alerts | ForEach-Object {
-    $object = [ordered]@{
-        id = $_.id
-        link = $_.link.href
-        parent = $_.parentObject.name
-        child = $_.childObject.name
-        policy = $_.policy.name
-        issued = [datetime]$_.issued
-        lastUpdated = [datetime]$_.lastUpdated
-        severity = $_.severity
-        category = $_.category
-        state = $_.state
-        message = $_.message
-        description = $_.description
-        count = $_.count
-    }
-    $report += New-Object -TypeName pscustomobject -Property $object
-}
-
-
-$exists = Test-Path -Path ".\$($file)" -PathType Leaf                                                             
-if($exists) {
-    # IMPORT THE CSV FILE
-    $csv = Import-Csv ".\$($file)" | Sort-Object {[datetime]$_.issued} | Select-Object -Last 1
-    if($csv.count -gt 0) {
-        foreach($row in $report) {
-            if([datetime]$row.issued -gt [datetime]$csv.issued) {
-                # APPEND NEW RECORDS
-                $row | Export-Csv ".\$($file)" -Append -NoTypeInformation
-            }
+# IF THERE ARE ALERTS
+if($alerts.count -gt 0) {
+    # BUILD THE RESULTS
+    $alerts | ForEach-Object {
+        $object = [ordered]@{
+            id = $_.id
+            link = $_.link.href
+            parent = $_.parentObject.name
+            child = $_.childObject.name
+            policy = $_.policy.name
+            issued = [datetime]$_.issued
+            lastUpdated = [datetime]$_.lastUpdated
+            severity = $_.severity
+            category = $_.category
+            state = $_.state
+            message = $_.message
+            description = $_.description
+            count = $_.count
         }
+        $report += New-Object -TypeName pscustomobject -Property $object
+    }
+
+    $exists = Test-Path -Path ".\$($file)" -PathType Leaf                                                             
+    if($exists) {
+        # IMPORT THE CSV FILE
+        $csv = Import-Csv ".\$($file)" | Sort-Object {[datetime]$_.issued} | Select-Object -Last 1
+        if($csv.count -gt 0) {
+            foreach($row in $report) {
+                if([datetime]$row.issued -gt [datetime]$csv.issued) {
+                    # APPEND NEW RECORDS
+                    $row | Export-Csv ".\$($file)" -Append -NoTypeInformation
+                }
+            }
+        } else {
+            # WRITE ALL OF THE ALERTS TO A NEW FILE
+            $report | Sort-Object {[datetime]$_.issued} | Export-Csv ".\$($file)" -NoTypeInformation
+        }
+        
     } else {
         # WRITE ALL OF THE ALERTS TO A NEW FILE
         $report | Sort-Object {[datetime]$_.issued} | Export-Csv ".\$($file)" -NoTypeInformation
     }
-    
-} else {
-    # WRITE ALL OF THE ALERTS TO A NEW FILE
-    $report | Sort-Object {[datetime]$_.issued} | Export-Csv ".\$($file)" -NoTypeInformation
+
+
+    # DISPLAY REPORT IN CONSOLE
+    $report | Format-List
+    # GET THE SIZE OF THE REPORT
+    $report.length
 }
-
-
-# DISPLAY REPORT IN CONSOLE
-$report | Format-List
-# GET THE SIZE OF THE REPORT
-$report.length
