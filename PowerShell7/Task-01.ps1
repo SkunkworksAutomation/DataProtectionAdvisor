@@ -10,13 +10,13 @@ Import-Module .\dell.dpa.psm1 -Force
     NAME:
         Cyber Threat Anomaly Detection
     TEMPLATE:
-        .\Template-AnalysisPolicy.xml
+        .\Task-01-AnalysisPolicyTemplate.xml
 #>
 $dpa = 'dpa-01.vcorp.local'
 
 new-authobject -Server $dpa
 
 #CREATE THE CYBER THREAT ANALiSYS POLICY
-$policy = new-policy -Path .\Template-AnalysisPolicy.xml
+$policy = new-policy -Path .\Task-01-AnalysisPolicyTemplate.xml
 
 $policy.aePolicy | Format-List

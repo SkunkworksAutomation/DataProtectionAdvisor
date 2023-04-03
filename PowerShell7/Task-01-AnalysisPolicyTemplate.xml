@@ -1,0 +1,94 @@
+<aePolicyCreateOrEdit>
+  <policy>
+    <name>Cyber Threat Anomaly Detection</name>
+    <policyType>analysispolicy</policyType>
+    <enabled>true</enabled>
+    <policyActions>
+      <email enabled="false"/>
+      <script enabled="false"/>
+      <snmpTraps enabled="false"/>
+      <eventLog enabled="false"/>
+    </policyActions>
+  </policy>
+  <added>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:04.405-07:00">
+      <rulesetType>EVENT_BASED</rulesetType>
+      <enabled>true</enabled>
+      <ruleTemplate version="1">
+        <id>c215f918-7f5e-46d8-a434-a8f30229aedd</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:08.297-07:00">
+      <rulesetType>EVENT_BASED</rulesetType>
+      <enabled>true</enabled>
+      <ruleTemplate version="1">
+        <id>d218e6ba-8463-4244-ae87-97ad774f0856</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:21.652-07:00">
+      <rulesetType>SCHEDULE_BASED</rulesetType>
+      <enabled>true</enabled>
+      <schedule>
+        <id>640f2456-2293-46fc-aba0-d684e375f4d0</id>
+        <name>9am every day</name>
+      </schedule>
+      <ruleTemplate version="1">
+        <id>74fe72fe-b5d2-4b34-b872-c12d7a280893</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:11.635-07:00">
+      <rulesetType>EVENT_BASED</rulesetType>
+      <enabled>true</enabled>
+      <ruleTemplate version="1">
+        <id>5769621d-c8fa-425e-b9da-52986c668779</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:19.668-07:00">
+      <rulesetType>EVENT_BASED</rulesetType>
+      <enabled>true</enabled>
+      <ruleTemplate version="1">
+        <id>67620352-5320-4acb-83bc-dcca6d05bd74</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:21.447-07:00">
+      <rulesetType>SCHEDULE_BASED</rulesetType>
+      <enabled>true</enabled>
+      <schedule>
+        <id>640f2456-2293-46fc-aba0-d684e375f4d0</id>
+        <name>9am every day</name>
+      </schedule>
+      <ruleTemplate version="1">
+        <id>dcbaac51-0269-4095-ba78-cd4b71c96bcd</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:22.94-07:00">
+      <rulesetType>SCHEDULE_BASED</rulesetType>
+      <enabled>true</enabled>
+      <schedule>
+        <id>640f2456-2293-46fc-aba0-d684e375f4d0</id>
+        <name>9am every day</name>
+      </schedule>
+      <ruleTemplate version="1">
+        <id>49be08e5-8a9b-4184-8324-0a618df685e4</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:21.16-07:00">
+      <rulesetType>SCHEDULE_BASED</rulesetType>
+      <enabled>true</enabled>
+      <schedule>
+        <id>640f2456-2293-46fc-aba0-d684e375f4d0</id>
+        <name>9am every day</name>
+      </schedule>
+      <ruleTemplate version="1">
+        <id>da971d93-5070-405f-a1e4-78dd9a638311</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+    <aePolicyRulesetAssignation version="1" lastModified="2022-10-19T14:56:07.299-07:00">
+      <rulesetType>EVENT_BASED</rulesetType>
+      <enabled>true</enabled>
+      <ruleTemplate version="1">
+        <id>e8311a6f-b2c2-425e-b338-c724a4243441</id>
+      </ruleTemplate>
+    </aePolicyRulesetAssignation>
+  </added>
+</aePolicyCreateOrEdit>
