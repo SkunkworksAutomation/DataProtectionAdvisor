@@ -21,15 +21,14 @@ $policy = 'Cyber Threat Anomaly Detection'
 $report = @()
 $file = 'alerts.csv'
 
-
+<#
 # GENERAL FILTER ALL ALERTS     
 $filter = @"
        <alertsFilter sortBy="lastUpdated" sortOrder="Descending">
         <type>Advanced</type>
        </alertsFilter>
 "@
-
-<#
+#>
 
 # CONDITIONAL FILTER FOR CYBER THREAT ANOMALY DETECTION
 # name = Cyber Threat Anomaly Detection
@@ -41,29 +40,22 @@ $filter = @"
 <name>Cyber Threat Filter</name>
 <userId>46c9a9d5-a645-4dcb-b288-3d30ff930ad7</userId>
 <type>Advanced</type>
-<rootFilterEntity type="CompoundCondition"><leftSide type="CompoundCondition">
+<rootFilterEntity type="CompoundCondition">
     <leftSide type="ScalarCondition">
-    <field>policy</field>
-    <operand>IS</operand>
-    <value>$($policy)</value>
+      <field>policy</field>
+      <operand>IS</operand>
+      <value>$($policy)</value>
     </leftSide>
     <logicalOperator>AND</logicalOperator>
     <rightSide type="ScalarCondition">
-    <field>state</field>
-    <operand>IS</operand>
-    <value>New</value>
-    </rightSide>
-    </leftSide><logicalOperator>AND</logicalOperator>
-    <rightSide type="ScalarCondition">
-    <field>severity</field>
-    <operand>IS</operand>
-    <value>Error</value>
+      <field>state</field>
+      <operand>IS</operand>
+      <value>New</value>
     </rightSide>
     </rootFilterEntity>
-</alertsFilter>
+    </alertsFilter>
 "@
 
-#>
 
 # CREATE THE AUTH OBJECT
 new-authobject -Server $dpa
